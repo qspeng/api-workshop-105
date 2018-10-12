@@ -11,9 +11,17 @@ spring:
 #  sleuth:
 #    sampler:
 #      percentage: 1.0
-# TODO: config logging path
 #logging:
-#  path: ./build/log
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        web: DEBUG
+  pattern:
+    file: '%d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger- %msg%n'
+    console: '%d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger- %msg%n'
+  file: /var/log/my.log
 
 info:
   app:
@@ -56,4 +64,5 @@ product:
     password: password
     poolSize: 20
     timeout: 5000
+
 

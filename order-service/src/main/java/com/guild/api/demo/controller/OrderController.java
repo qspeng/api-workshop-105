@@ -12,6 +12,8 @@ import static javax.servlet.http.HttpServletResponse.SC_SERVICE_UNAVAILABLE;
 
 import javax.validation.constraints.Size;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -36,7 +38,7 @@ import io.swagger.annotations.ApiResponses;
 @Api(tags = "Order Service", description = "Operations on Orders")
 @Validated
 public class OrderController {
-//    private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
 
     @Autowired
     private OrderService orderService;
@@ -61,8 +63,7 @@ public class OrderController {
                                                    @Size(min = ORDER_ID_MIN_LENGTH, max = ORDER_ID_MAX_LENGTH, message = ORDER_ID_LENGTH_MESSAGE)
                                                    @PathVariable String orderId) {
         OrderModel orderModel = orderService.getOrder(orderId);
-//        TODO: add Logger for test here
-//        LOGGER.info(orderModel.toString());
+        LOGGER.info(orderModel.toString());
         return orderTranslator.translate(orderModel);
     }
 
@@ -80,8 +81,7 @@ public class OrderController {
                                                        @Size(min = ORDER_ID_MIN_LENGTH, max = ORDER_ID_MAX_LENGTH, message = ORDER_ID_LENGTH_MESSAGE)
                                                        @PathVariable String orderId) {
         OrderModel orderModel = orderServiceSync.getOrder(orderId);
-//        TODO: add Logger for test here
-//        LOGGER.info(orderModel.toString());
+        LOGGER.info(orderModel.toString());
         return orderTranslator.translate(orderModel);
     }
 }
